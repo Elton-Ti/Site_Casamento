@@ -31,20 +31,15 @@
     <div class="container">
         <div class="header">
             <h1>📊 Dashboard de Produtos</h1>
-            <p>Dados atualizados automaticamente da planilha Excel</p>
+            <p>Dados em tempo real do Google Sheets</p>
         </div>
 
-        {% if importacao %}
-            {% if importacao.erro %}
-                <div class="alert alert-error">Erro na importação: {{ importacao.erro }}</div>
-            {% else %}
-                <div class="alert alert-success">
-                    ✅ Planilha importada com sucesso! 
-                    {{ importacao.importados }} novos | 
-                    {{ importacao.atualizados }} atualizados | 
-                    {{ importacao.total }} no total
-                </div>
-            {% endif %}
+        {% if erro %}
+            <div class="alert alert-error">Erro ao carregar dados do Google Sheets: {{ erro }}</div>
+        {% else %}
+            <div class="alert alert-success">
+                ✅ Conectado ao Google Sheets com sucesso! Os dados são atualizados em tempo real.
+            </div>
         {% endif %}
 
         <button class="btn-atualizar" onclick="atualizarDados()">🔄 Atualizar Dados Agora</button>
@@ -105,15 +100,13 @@
         });
 
         function atualizarDados() {
-            fetch('{% url "app_dashboard:atualizar_dados" %}')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.erro) alert('Erro ao atualizar: ' + data.erro);
-                    else { alert(`Dados atualizados! ${data.importados} novos, ${data.atualizados} atualizados`); location.reload(); }
-                })
-                .catch(error => alert('Erro na requisição: ' + error));
+            const btn = document.querySelector('.btn-atualizar');
+            btn.innerHTML = '🔄 Carregando...';
+            btn.style.opacity = '0.7';
+            location.reload();
         }
-        setInterval(atualizarDados, 30000);
+        // Atualiza a página a cada 60 segundos
+        setInterval(atualizarDados, 60000);
     </script>
 </body>
 </html>
