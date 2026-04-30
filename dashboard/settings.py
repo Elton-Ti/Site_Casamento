@@ -7,7 +7,7 @@ SECRET_KEY = "django-dashboard-123456"
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     "django.contrib.admin",
