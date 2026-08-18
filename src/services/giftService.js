@@ -9,7 +9,7 @@
 
 import { initialGifts } from '../data/gifts';
 
-const STORAGE_KEY = 'wedding_gift_list_data_v1';
+const STORAGE_KEY = 'wedding_gift_list_data_v2';
 
 /**
  * Inicializa os dados no LocalStorage se ainda não existirem
