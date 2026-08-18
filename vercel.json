@@ -1,15 +1,8 @@
 {
-  "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "dashboard/wsgi.py",
-      "use": "@vercel/python"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "dashboard/wsgi.py"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
